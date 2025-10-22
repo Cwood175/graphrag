@@ -3,6 +3,7 @@ name = "graphrag"
 # Maintainers: do not change the version here manually
 version = "2.7.0"
 description = "GraphRAG: A graph-based retrieval-augmented generation (RAG) system."
+readme = "README.md"
 authors = [
     {name = "Alonso Guevara Fernández", email = "alonsog@microsoft.com"},
     {name = "Andrés Morales Esquivel", email = "andresmor@microsoft.com"},
