@@ -99,8 +99,8 @@ async def prepare_azurite_data(input_path: str, azure: dict) -> Callable[[], Non
         container_name=input_container,
     )
     # Bounce the container if it exists to clear out old run data
-    input_storage._delete_container()  # noqa: SLF001
-    input_storage._create_container()  # noqa: SLF001
+    input_storage._delete_container()  # ruff: ignore[private-member-access]
+    input_storage._create_container()  # ruff: ignore[private-member-access]
 
     # Upload data files
     txt_files = list((root / "input").glob("*.txt"))
@@ -115,7 +115,7 @@ async def prepare_azurite_data(input_path: str, azure: dict) -> Callable[[], Non
         )
         await input_storage.set(file_path, text, encoding="utf-8")
 
-    return lambda: input_storage._delete_container()  # noqa: SLF001
+    return lambda: input_storage._delete_container()  # ruff: ignore[private-member-access]
 
 
 class TestIndexer:
@@ -226,6 +226,7 @@ class TestIndexer:
             "LOCAL_BLOB_STORAGE_CONNECTION_STRING": WELL_KNOWN_AZURITE_CONNECTION_STRING,
             "AZURE_AI_SEARCH_URL_ENDPOINT": os.getenv("AZURE_AI_SEARCH_URL_ENDPOINT"),
             "AZURE_AI_SEARCH_API_KEY": os.getenv("AZURE_AI_SEARCH_API_KEY"),
+            "GRAPHRAG_API_KEY": "test",
         },
         clear=True,
     )
